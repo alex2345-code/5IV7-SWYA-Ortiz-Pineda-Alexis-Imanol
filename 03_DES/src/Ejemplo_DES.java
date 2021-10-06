@@ -15,6 +15,7 @@ para ello vamos a ocupar las librerias de
 SECURITY
 CRYPTO
  */
+
 import javax.crypto.*;
 import javax.crypto.spec.*;
 //generar las llaves 
@@ -47,14 +48,14 @@ public class Ejemplo_DES {
 
         
         //la clase que se encarga de generar llaves
-        KeyGenerator generadorDes = KeyGenerator.getInstance("DES");
+        KeyGenerator generadorDES = KeyGenerator.getInstance("DES");
 
         
         //inicializar el tamammio de la llave del generador 
-        generadorDes.init(512); // 56 bits
+        generadorDES.init(56); // 56 bits
 
         //generar la clave 
-        SecretKey clave = generadorDES.generateKEY();//es generar las 16 llaves
+        SecretKey clave = generadorDES.generateKey();//es generar las 16 llaves
         
 
         System.out.println("Clave es: " + clave);
@@ -83,12 +84,97 @@ public class Ejemplo_DES {
         RELLENO : PKCS5
         */
         
-        System.out.println("2.- Cifrar con DES el archivo : " + args[0]);
-        cifrado.init(0, clave);
+        System.out.println("2.- Cifrar con DES el archivo : " + args[0]
+        + ", dejar erl resultado en : " + args[0]+ ".cifrado");
+        
+        cifrado.init(Cipher.ENCRYPT_MODE, clave);
+        
+        //el problema es como vamos a leer lso bloques 
+        
+        //buffer para la entrada y salida de los bits 
+        
+        byte[] buffer = new byte[1000]; //vamos a leer cada mil 
+        byte[] bufferCifrado;
+        
+        //generar mis archivos 
+        
+        FileInputStream in = new FileInputStream(args[0]);
+        FileOutputStream out = new FileOutputStream(args[0]+".cifrado");
+        
+        //lectura 
+        
+        int bytesleidos = in.read(buffer, 0, 1000);
+        //mientras no este al final del fichero o del archivo 
+        while(bytesleidos != -1){
+            //pasar al tecto claro leido al cifrador
+            bufferCifrado = cifrado.update(buffer, 0, bytesleidos);
+            //generear la salida
+            out.write(bufferCifrado);
+            bytesleidos = in.read(buffer, 0, 1000);
+            
+        }
+        //vamos a reunir lso bloques del cifrado 
+        bufferCifrado = cifrado.doFinal();
+        //ya puedo escribir el archivo cifrado
+        out.write(bufferCifrado);
+        
+        
+        in.close();
+        out.close();
+        
+        //vamos a descifrar
+        
+         System.out.println("3.- Descifrar con DES el archivo : " + args[0]
+        + ", cifrado : " +"vamos a ver el resultado en el archivo:"
+         + args[0]+ ".descifrado");
+        
+        
+        cifrado.init(Cipher.DECRYPT_MODE, clave);
+        
+        
+        //buffer para la entrada y salida de los bits 
+        
+       
+        byte[] bufferPlano;
+        
+        //generar mis archivos 
+        
+         in = new FileInputStream(args[0]+".cifrado");
+         out = new FileOutputStream(args[0]+".descifrado");
+        
+        //lectura 
+        
+        bytesleidos = in.read(buffer, 0, 1000);
+        //mientras no este al final del fichero o del archivo 
+        while(bytesleidos != -1){
+            //pasar al tecto claro leido al cifrador
+            bufferPlano= cifrado.update(buffer, 0, bytesleidos);
+            //generear la salida
+            out.write(bufferPlano);
+            bytesleidos = in.read(buffer, 0, 1000);
+            
+        }
+        //vamos a reunir lso bloques del cifrado 
+        bufferPlano = cifrado.doFinal();
+        //ya puedo escribir el archivo cifrado
+        out.write(bufferPlano);
+        
+        in.close();
+        out.close();
+        
+        
     }
 
-    private static void mensajeAyuda() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public static void mensajeAyuda() {
+        System.out.println("Ejemplo de cifrado DES para archios .txt");
+        System.out.println("Cuidado con la llave solo debe de ser de 8 caracters");
+        System.out.println("Compruebe que si cargo el fichero o archivo para cifrar");
+        System.out.println("Amimir :3");
+        
+    }
+
+    public static void mostrarBytes(byte[] buffer) {
+       System.out.write(buffer, 0, buffer.length);
     }
 
     
