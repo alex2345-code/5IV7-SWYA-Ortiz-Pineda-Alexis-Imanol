@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;414;500&display=swap" rel="stylesheet">
+    <title>Página Descifrado</title>
+</head>
+<body>
+  <br><br><br>
+  <center>
+        <form name="form">
+                <input  type="file" id="archivo" class="input-file" value="">
+                <br>
+              </div>
+                <br>
+                <p>Ingresa la llave</p>
+                <input type="radio" name="tipoDeAES" value="128"> 128
+                <br><br>
+                <input type="radio" name="tipoDeAES" value="192"> 192
+                <br><br>
+                <input type="radio" name="tipoDeAES" value="256"> 256
+                <br><br>
+                <input type="text" name="llave" placeholder="ingrese la llave" class="textbox" id="llave">
+                <br><br>
+                <button  type="button" onclick="return descifrar()"><span></span>descifrar</button>
+            
+        </form>
+        <h4>mensaje cifrado</h4>
+        <p id="contenido"></p>
+        <p id="mensajes"></p>
+        <h4>mensaje descifrado</h4>
+        <p id="mensajeDescifrado"></p>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" > </script>
+        <script src="./js/descifrar.js"></script>
+    </div>
+    
+    <button type="button" onclick="window.location='./index.html'">
+      Volver<span></span>
+    </button>
+    <button type="button" onclick="window.location='./cifrado.html'">
+      cifrado<span></span>
+    </button>
+  </center>
+  
+</body>
+
+<footer>
+  <div>
+    <center>
+    <h3 class='minom' >Ortiz Pineda Alexis Imanol 5IV7</h3>
+  </center>
+  </div>
+</footer>
+
+</html>

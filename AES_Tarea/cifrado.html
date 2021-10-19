@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;414;500&display=swap"
+      rel="stylesheet"
+    />
+    <title>Página Cifrado</title>
+  </head>
+  <body>
+    <center>
+      <p><h1>Elige el tipo de cifrado AES</h1></p><br><br>
+
+      <form name="form">
+           
+        <input type="radio" name="tipoAES" value="128" /> 128
+        <br><br>
+        <input type="radio" name="tipoAES" value="192" /> 192
+        <br><br>
+        <input type="radio" name="tipoAES" value="256" /> 256
+        <br><br><br>
+        <input type="text" placeholder="ingrese la llave" id="llave"  class="textbox"/>
+        <input type="text" placeholder="ingrese el mensaje" id="mensaje" class="textbox" /><br><br><br><br>
+        <button type="button" onclick="return cifrar()">
+          <span></span> cifrar
+        </button>
+      </form>
+
+      <p id="cifrado"></p>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+      <script src="./js/cifrar.js"></script>
+
+      <button type="button" onclick="window.location='./index.html'">
+        Volver<span></span>
+      </button>
+      <button type="button" onclick="window.location='./descifrado.html'">
+        descifrado<span></span>
+      </button>
+    </center>
+  </body>
+  <footer>
+    <div>
+      <center>
+        <h3 class="minom">Ortiz Pineda Alexis Imanol 5IV7</h3>
+      </center>
+    </div>
+  </footer>
+</html>
